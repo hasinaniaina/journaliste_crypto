@@ -8,33 +8,34 @@ puts "=================================="
 	for x in 0...devise.length
 		contenant[devise[x]] = montant[x]
 	end	
-	puts contenant
 
 puts "============================="
 puts "	| le max de contenant	|" 
 puts "============================="
-	puts contenant.max_by{|x,y| y[1,10].to_i}
-
+	max = contenant.max_by{|x,y| y[1,10].to_f}
+	puts "la valeur max dans le hash est#{max[1]}"
 puts "============================="
 puts "	| le min de contenant	|" 
 puts "============================="
-	puts contenant.min_by{|x,y| y[1,10].to_i}
+	min = contenant.min_by{|x,y| y[1,10].to_f}
+	puts "la valeur min dans le hash est#{min[1]}"
 puts "========================================="
 puts "	| Trouver  'coin' dans contenant	|" 
 puts "========================================="
-	trier = Proc.new { |x| /coin/.match(x.downcase)}
-	puts contenant.select(&trier)
+	trier = Proc.new { |x,y| /coin/.match(x.downcase) }
+	nombre = contenant.select(&trier).count
+	puts "le nombre de mots qui contient coin est de #{nombre}"
 puts "====================================================="
 puts "	| Trouver tous les chiffres inferieur a 6000	|" 
 puts "====================================================="
-	puts contenant.select{|x,y|  y[1,10].to_i < 6000 }
+	 contenant.select{|x,y|  if y[1,10].to_i < 6000 then print "#{y}, " end }
 puts "================================================================="
-puts "	| Trouver  le min dans tous les chiffres inferieur a 6000	|" 
+puts "	| Trouver  le max dans tous les chiffres inferieur a 6000	|" 
 puts "================================================================="
 	hasina = Hash.new
-	hasina = contenant.select{|x,y|  y[1,10].to_i < 6000 }
-	puts hasina.max_by{|x,y| y[1,10].to_i}
-
+	hasina = contenant.select{|x,y|   y[1,10].to_f < 6000.to_f }
+	hasina2 = hasina.max_by{|x,y| y[1,10].to_f }
+	puts " la valeur maximum inférieur à 6000 est #{hasina2[1]}"
 
 
 
